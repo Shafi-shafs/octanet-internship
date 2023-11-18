@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+    <link rel="stylesheet" href="../css/home.css">
+</head>
+
+<body>
+
+    <h1>Website Development Task Management System</h1>
+
+    <div id="taskContainer" class="task-container"></div>
+
+    <div class="progress" id="progress"></div>
+
+    <script>
+        const tasks = [
+            { id: 1, name: "Define Project Scope", deadline: "2023-12-01", priority: "High", labels: ["Planning", "Scope"], completed: false },
+            { id: 2, name: "Design User Interface", deadline: "2023-12-10", priority: "Medium", labels: ["Design", "UI"], completed: false },
+            { id: 3, name: "Implement Backend Functionality", deadline: "2023-12-20", priority: "Low", labels: ["Development", "Backend"], completed: false },
+            { id: 4, name: "Optimize Performance", deadline: "2023-12-15", priority: "High", labels: ["Optimization", "Performance"], completed: false },
+            { id: 5, name: "Test Cross-Browser Compatibility", deadline: "2023-12-18", priority: "Medium", labels: ["Testing", "Compatibility"], completed: false },
+            // Add more tasks as needed
+            { id: 6, name: "Task 6", deadline: "2023-12-25", priority: "Low", labels: ["Misc"], completed: false },
+            { id: 7, name: "Task 7", deadline: "2023-12-30", priority: "High", labels: ["Misc"], completed: false },
+            { id: 8, name: "Design User Interface", deadline: "2023-12-10", priority: "Medium", labels: ["Design", "UI"], completed: false },
+            { id: 9, name: "Implement Backend Functionality", deadline: "2023-12-20", priority: "Low", labels: ["Development", "Backend"], completed: false },
+            { id: 10, name: "Optimize Performance", deadline: "2023-12-15", priority: "High", labels: ["Optimization", "Performance"], completed: false },
+            { id: 11, name: "Test Cross-Browser Compatibility", deadline: "2023-12-18", priority: "Medium", labels: ["Testing", "Compatibility"], completed: false },
+            { id: 12, name: "Task 6", deadline: "2023-12-25", priority: "Low", labels: ["Misc"], completed: false },
+            
+        ];
+
+        function createTaskElement(task) {
+            const taskElement = document.createElement("div");
+            taskElement.classList.add("task", task.priority.toLowerCase() + "-priority");
+
+            taskElement.innerHTML = `
+                <h2>${task.name}</h2>
+                <p>Deadline: ${task.deadline}</p>
+                <p>Priority: ${task.priority}</p>
+                <p>Labels: ${task.labels.join(", ")}</p>
+                <input type="checkbox" ${task.completed ? 'checked' : ''} onclick="updateTaskStatus(${task.id})"> Completed
+            `;
+
+            return taskElement;
+        }
+
+        function updateTaskStatus(taskId) {
+            const task = tasks.find(t => t.id === taskId);
+            task.completed = !task.completed;
+
+            // Update the task status in the UI
+            displayTasks();
+            // Update progress
+            updateProgress();
+        }
+
+        function displayTasks() {
+            const taskContainer = document.getElementById("taskContainer");
+            taskContainer.innerHTML = '';
+
+            let rowContainer;
+
+            tasks.forEach((task, index) => {
+                if (index % 3 === 0) {
+                    // Start a new row after every three tasks
+                    rowContainer = document.createElement("div");
+                    rowContainer.classList.add("task-row");
+                }
+
+                const taskElement = createTaskElement(task);
+                rowContainer.appendChild(taskElement);
+
+                if (index % 3 === 2 || index === tasks.length - 1) {
+                    // End the row after the third task or if it's the last task
+                    taskContainer.appendChild(rowContainer);
+                }
+            });
+        }
+
+        function updateProgress() {
+            const completedTasks = tasks.filter(task => task.completed).length;
+            const totalTasks = tasks.length;
+
+            const progressElement = document.getElementById("progress");
+            progressElement.innerText = `Progress: ${completedTasks}/${totalTasks} tasks completed`;
+        }
+
+        window.onload = function () {
+            displayTasks();
+            updateProgress();
+        };
+    </script>
+</body>
+
+</html>
