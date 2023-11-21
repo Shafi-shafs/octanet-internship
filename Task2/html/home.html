@@ -22,7 +22,6 @@
             { id: 3, name: "Implement Backend Functionality", deadline: "2023-12-20", priority: "Low", labels: ["Development", "Backend"], completed: false },
             { id: 4, name: "Optimize Performance", deadline: "2023-12-15", priority: "High", labels: ["Optimization", "Performance"], completed: false },
             { id: 5, name: "Test Cross-Browser Compatibility", deadline: "2023-12-18", priority: "Medium", labels: ["Testing", "Compatibility"], completed: false },
-            // Add more tasks as needed
             { id: 6, name: "Task 6", deadline: "2023-12-25", priority: "Low", labels: ["Misc"], completed: false },
             { id: 7, name: "Task 7", deadline: "2023-12-30", priority: "High", labels: ["Misc"], completed: false },
             { id: 8, name: "Design User Interface", deadline: "2023-12-10", priority: "Medium", labels: ["Design", "UI"], completed: false },
@@ -52,9 +51,7 @@
             const task = tasks.find(t => t.id === taskId);
             task.completed = !task.completed;
 
-            // Update the task status in the UI
             displayTasks();
-            // Update progress
             updateProgress();
         }
 
@@ -66,7 +63,7 @@
 
             tasks.forEach((task, index) => {
                 if (index % 3 === 0) {
-                    // Start a new row after every three tasks
+                    
                     rowContainer = document.createElement("div");
                     rowContainer.classList.add("task-row");
                 }
@@ -75,7 +72,7 @@
                 rowContainer.appendChild(taskElement);
 
                 if (index % 3 === 2 || index === tasks.length - 1) {
-                    // End the row after the third task or if it's the last task
+                    
                     taskContainer.appendChild(rowContainer);
                 }
             });

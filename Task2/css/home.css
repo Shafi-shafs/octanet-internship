@@ -41,15 +41,15 @@ h1 {
 }
 
 .high-priority {
-    background-color: #FFB6C1;
+    background-color: #ed3a55;
 }
 
 .medium-priority {
-    background-color: #FFFACD;
+    background-color: #fcf081;
 }
 
 .low-priority {
-    background-color: #98FB98;
+    background-color: #74f574;
 }
 
 .task:hover {
